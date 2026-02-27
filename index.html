@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open Whatsapp</title>
+    <style>
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f2f5;
+      }
+      .container {
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+      }
+      input {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 18px;
+        box-sizing: border-box;
+      }
+      button {
+        width: 100%;
+        padding: 15px;
+        background-color: #25d366;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input
+        type="tel"
+        id="mobileNumber"
+        placeholder="Mobile number with country code"
+      />
+      <button onclick="openWhatsApp()">Open Chat</button>
+    </div>
+
+    <script>
+      function openWhatsApp() {
+        const number = document
+          .getElementById("mobileNumber")
+          .value.replace(/\D/g, "");
+        if (number) {
+          window.location.href = `https://wa.me/${number}`;
+        } else {
+          alert("Please enter a valid number");
+        }
+      }
+
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("sw.js");
+        });
+      }
+    </script>
+  </body>
+</html>
